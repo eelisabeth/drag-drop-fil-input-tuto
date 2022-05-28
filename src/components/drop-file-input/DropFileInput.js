@@ -23,6 +23,14 @@ const DropFileInput = props => {
         }
     }
 
+    const fileRemove = (file) => {
+        // console.log(file);
+        const updatedList = [...fileList];
+        updatedList.splice(fileList.indexOf(file), 1);
+        setFileList(updatedList);
+        props.onFileChange(updatedList)
+    }
+
     return (
         <>
             <div
@@ -60,8 +68,12 @@ const DropFileInput = props => {
                                     />
                                     <div className="drop-file-preview__item__info">
                                         <p>{item.name}</p>
-                                        <p>{item.size}</p>
+                                        <p>{item.size}B</p>
                                     </div>
+                                    <span
+                                        className="drop-file-preview__item__del"
+                                        onClick={() => fileRemove(item)}
+                                    >x</span>
                                 </div>
                             ))
                         }
