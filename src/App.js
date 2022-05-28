@@ -1,4 +1,5 @@
 import './App.css';
+import DropFileInput from './components/drop-file-input/DropFileInput';
 
 function App() {
     return (
@@ -6,6 +7,7 @@ function App() {
 			<h2 className="header">
 				React drop files input
 			</h2>
+			<DropFileInput />
         </div>
     );
 }
