@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import './drop-file-input.css';
 import uploadImg from '../../assets/cloud-upload-regular-240.png';
+import { ImageConfig } from '../../config/ImageConfig';
 import { useRef, useState } from 'react';
 
 const DropFileInput = props => {
@@ -23,25 +24,51 @@ const DropFileInput = props => {
     }
 
     return (
-        <div
-            ref={wrapperRef}
-            className="drop-file-input"
-            onDragEnter={onDragEnter}
-            onDragLeave={onDragLeave}
-            onDrop={onDrop}
-        >
-            <div className="drop-file-input__label">
-                <img src={uploadImg} alt="" />
-                <p>Drag & Drop your files here</p>
+        <>
+            <div
+                ref={wrapperRef}
+                className="drop-file-input"
+                onDragEnter={onDragEnter}
+                onDragLeave={onDragLeave}
+                onDrop={onDrop}
+            >
+                <div className="drop-file-input__label">
+                    <img src={uploadImg} alt="" />
+                    <p>Drag & Drop your files here</p>
+                </div>
+                <input
+                    type="file"
+                    value=""
+                    name=""
+                    id=""
+                    onChange={onFileDrop}
+                />
             </div>
-            <input
-                type="file"
-                value=""
-                name=""
-                id=""
-                onChange={onFileDrop}
-            />
-        </div>
+
+            {
+                fileList.length > 0 && (
+                    <div className="drop-file-preview">
+                        <p className="drop-file-preview__title">
+                            Ready to upload
+                        </p>
+                        {
+                            fileList.map((item, index) => (
+                                <div key={index} className="drop-file-preview__item">
+                                    <img
+                                        src={ImageConfig[item.type.split('/')[1]] || ImageConfig['default']}
+                                        alt=""
+                                    />
+                                    <div className="drop-file-preview__item__info">
+                                        <p>{item.name}</p>
+                                        <p>{item.size}</p>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                )
+            }
+        </>
     )
 }
 
