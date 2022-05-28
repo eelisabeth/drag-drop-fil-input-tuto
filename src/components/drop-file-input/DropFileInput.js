@@ -1,15 +1,26 @@
 import PropTypes from 'prop-types';
 import './drop-file-input.css';
 import uploadImg from '../../assets/cloud-upload-regular-240.png';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const DropFileInput = props => {
 
     const wrapperRef = useRef(null);
 
+    const [fileList, setFileList] = useState([]);
+
     const onDragEnter = () => wrapperRef.current.classList.add('dragover');
     const onDragLeave = () => wrapperRef.current.classList.remove('dragover');
     const onDrop = () => wrapperRef.current.classList.remove('dragover');
+
+    const onFileDrop = (e) => {
+        const newFile = e.target.files[0];
+        if (newFile) {
+            const updatedList = [...fileList, newFile];
+            setFileList(updatedList);
+            props.onFileChange(updatedList)
+        }
+    }
 
     return (
         <div
@@ -23,11 +34,19 @@ const DropFileInput = props => {
                 <img src={uploadImg} alt="" />
                 <p>Drag & Drop your files here</p>
             </div>
-            <input type="file" value="" name="" id="" />
+            <input
+                type="file"
+                value=""
+                name=""
+                id=""
+                onChange={onFileDrop}
+            />
         </div>
     )
 }
 
-DropFileInput.propTypes = {}
+DropFileInput.propTypes = {
+    onFileChange: PropTypes.func
+}
 
 export default DropFileInput
