@@ -1,0 +1,2 @@
+- https://github.com/trananhtuat/react-drop-file-input
+- https://www.youtube.com/watch?v=Aoz0eQAbEUo
