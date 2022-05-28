@@ -22,7 +22,8 @@
     cursor: pointer;
 }
 
-.drop-file-input:hover, .drop-file-input.dragover {
+/* .drop-file-input:hover,  */
+.drop-file-input.dragover {
     opacity: 0.6;
 }
 
